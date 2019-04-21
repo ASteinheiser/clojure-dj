@@ -2,19 +2,9 @@
 
 A Clojure app, made with Overtone, designed to make (good?) music...
 
-## Install dependencies
-```
-lein deps
-lein install
-```
-
-## Compile files
-```
-lein compile
-```
-
 ## Run locally
 ```
+lein deps
 lein run
 ```
 
