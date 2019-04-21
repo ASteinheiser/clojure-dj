@@ -1,7 +1,7 @@
 (ns clojure-dj.core
   (use 'overtone.live))
 
-(defn -main
+(defn main
   "making some music..."
   [& args]
     (demo 7 (lpf (mix (saw [50 (line 100 1600 5) 101 100.5]))

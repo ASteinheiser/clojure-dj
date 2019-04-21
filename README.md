@@ -2,6 +2,16 @@
 
 A Clojure library, made with Overtone, designed to make (good?) music...
 
+## Install dependencies
+```
+lein install
+```
+
+## Compile files
+```
+lein compile
+```
+
 ## Run
 ```
 lein run
