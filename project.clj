@@ -7,4 +7,5 @@
     [org.clojure/clojure "1.10.0"]
     [overtone "0.10.3"]
   ]
-  :repl-options {:init-ns clojure-dj.core})
+  :repl-options {:init-ns clojure-dj.core}
+  :main clojure_dj.core/main)
