@@ -1,6 +1,6 @@
 # clojure-dj
 
-A Clojure library, made with Overtone, designed to make (good?) music...
+A Clojure app, made with Overtone, designed to make (good?) music...
 
 ## Install dependencies
 ```
@@ -12,13 +12,17 @@ lein install
 lein compile
 ```
 
-## Run
+## Run locally
 ```
 lein run
 ```
 
-## Build
+## Build app
 ```
 lein uberjar
+```
+
+## Run compiled app
+```
 java -jar target/clojure-dj-0.1.0-SNAPSHOT-standalone.jar
 ```
