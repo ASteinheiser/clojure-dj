@@ -4,6 +4,7 @@ A Clojure app, made with Overtone, designed to make (good?) music...
 
 ## Install dependencies
 ```
+lein deps
 lein install
 ```
 

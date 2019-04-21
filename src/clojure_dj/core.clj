@@ -1,5 +1,6 @@
 (ns clojure-dj.core
-  (:gen-class))
+  (:gen-class)
+  (:use [overtone.live]))
 
 (defn -main [& args]
-  (println "Welcome to my project! These are your args:" args))
+  (demo (sin-osc)))
