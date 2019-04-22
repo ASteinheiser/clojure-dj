@@ -1,12 +1,8 @@
-(defproject clojure-dj "0.1.0-SNAPSHOT"
+(defproject clojure-dj "0.1.0"
   :description "Epic music"
   :url "https://iamandrew.io"
   :license {:name "MIT"
             :url "https://opensource.org/licenses/MIT"}
-  :dependencies [
-    [org.clojure/clojure "1.10.0"]
-    [overtone "0.10.3"]
-  ]
-  :repl-options {:init-ns clojure-dj.core}
-  :main clojure-dj.core
-  :aot [clojure-dj.core])
+  :dependencies [[overtone/overtone "0.10.3"]]
+  :native-path "native"
+  :source-paths ["src"])
