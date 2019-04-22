@@ -13,10 +13,12 @@
 (defn fuzz-beat
   "Lifechanging beat."
   [speed]
-  (fuzz-synth)
-  (Thread/sleep (* 1000 speed))
-  (fuzz-synth)
-  (Thread/sleep (* 4000 speed)))
+  (while (< 0 1)
+    (do
+      (fuzz-synth)
+      (Thread/sleep (* 1000 speed))
+      (fuzz-synth)
+      (Thread/sleep (* 3000 speed)))))
 
 (defn -main
   "Insert Beautiful Music Here."
