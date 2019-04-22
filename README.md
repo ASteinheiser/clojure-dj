@@ -2,18 +2,14 @@
 
 A Clojure app, made with Overtone, designed to make (good?) music...
 
-## Run locally
+## Run Locally
 ```
 lein deps
 lein run
 ```
 
-## Build app
+## Build & Run Production App
 ```
 lein uberjar
-```
-
-## Run compiled app
-```
-java -jar target/clojure-dj-0.1.0-SNAPSHOT-standalone.jar
+java -jar target/clojure-dj-0.1.0-standalone.jar
 ```
