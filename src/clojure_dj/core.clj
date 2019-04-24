@@ -19,10 +19,10 @@
     (* (sin-osc fenv (* 0.5 Math/PI)) aenv)))
 
 (defn chord-progression-beat [m beat-num]
-  (at (m (+ 0 beat-num)) (play-chord (chord :C4 :major)))
-  (at (m (+ 4 beat-num)) (play-chord (chord :G3 :major)))
+  (at (m (+ 1 beat-num)) (play-chord (chord :C4 :major)))
+  (at (m (+ 5 beat-num)) (play-chord (chord :G3 :major)))
   (at (m (+ 8 beat-num)) (play-chord (chord :A3 :minor)))
-  (at (m (+ 14 beat-num)) (play-chord (chord :F3 :major)))
+  (at (m (+ 13 beat-num)) (play-chord (chord :F3 :major)))
   (apply-at (m (+ 16 beat-num)) chord-progression-beat m (+ 16 beat-num) []))
 
 (defn drum-beat [m beat-num]
@@ -47,5 +47,5 @@
 (defn -main
   "Insert Beautiful Music Here."
   [& args]
-  ; (chord-progression-beat metro (metro))
+  (chord-progression-beat metro (metro))
   (drum-beat metro (metro)))
