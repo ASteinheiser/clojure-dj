@@ -3,7 +3,11 @@
   :url "https://iamandrew.io"
   :license {:name "MIT"
             :url "https://opensource.org/licenses/MIT"}
-  :dependencies [[overtone/overtone "0.10.3"]]
+  :dependencies [
+    [org.clojure/clojure "1.8.0"]
+    [overtone/overtone "0.10.3"]
+    [leipzig "0.10.0"]
+  ]
   :source-paths ["src"]
   :native-path "%s/native"
   :target-path "target"
