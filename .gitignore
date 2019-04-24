@@ -11,7 +11,5 @@ pom.xml.asc
 /.nrepl-port
 .hgignore
 .hg/
-# build files
-/native
 # error log files
 *.log
