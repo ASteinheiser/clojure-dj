@@ -1,22 +1,8 @@
 (ns clojure-dj.core
   (:gen-class)
-  (:use overtone.live))
-
-(definst saw-wave [freq 440 attack 0.01 sustain 0.4 release 0.1 vol 0.4] 
-  (* (env-gen (env-lin attack sustain release) 1 1 0 1 FREE)
-     (saw freq)
-     vol))
-
-(defn saw2 [music-note]
-  (saw-wave (midi->hz (note music-note))))
-
-(defn play-chord [a-chord]
-  (doseq [note a-chord] (saw2 note)))
-
-(definst kick [freq 50 env-ratio 3 freq-decay 0.02 amp-decay 0.5]
-  (let [fenv (* (env-gen (envelope [env-ratio 1] [freq-decay] :exp)) freq)
-        aenv (env-gen (perc 0.005 amp-decay) :action FREE)]
-    (* (sin-osc fenv (* 0.5 Math/PI)) aenv)))
+  (:use overtone.live)
+  (:use chord_synth.core)
+  (:use drums.core))
 
 (defn chord-progression-beat [m beat-num]
   (at (m (+ 1 beat-num)) (play-chord (chord :C4 :major)))
