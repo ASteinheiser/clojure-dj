@@ -4,6 +4,9 @@
   :license {:name "MIT"
             :url "https://opensource.org/licenses/MIT"}
   :dependencies [[overtone/overtone "0.10.3"]]
-  :native-path "native"
   :source-paths ["src"]
-  :main clojure-dj.core)
+  :native-path "%s/native"
+  :target-path "target"
+  :compile-path "%s/aot-files"
+  :main clojure-dj.core
+  :profiles {:uberjar {:aot :all}})
