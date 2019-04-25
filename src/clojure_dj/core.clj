@@ -1,8 +1,9 @@
 (ns clojure-dj.core
   (:gen-class)
-  (:use overtone.live)
+  (:use bass.core)
   (:use chord_synth.core)
-  (:use drums.core))
+  (:use drums.core)
+  (:use overtone.live))
 
 (defn chord-progression-beat [m beat-num]
   (at (m (+ 1 beat-num)) (play-chord (chord :C4 :major)))
@@ -17,12 +18,12 @@
   (at (m (+ 5 beat-num)) (kick))
   (at (m (+ 6 beat-num)) (kick))
   (at (m (+ 6.5 beat-num)) (kick))
-  (at (m (+ 6.75 beat-num)) (kick))
+  (at (m (+ 6.75 beat-num)) (bass))
   (at (m (+ 7 beat-num)) (kick))
   (at (m (+ 9 beat-num)) (kick))
   (at (m (+ 10 beat-num)) (kick))
   (at (m (+ 10.5 beat-num)) (kick))
-  (at (m (+ 10.75 beat-num)) (kick))
+  (at (m (+ 10.75 beat-num)) (bass))
   (at (m (+ 11 beat-num)) (kick))
   (at (m (+ 13 beat-num)) (kick))
   (at (m (+ 15 beat-num)) (kick))
