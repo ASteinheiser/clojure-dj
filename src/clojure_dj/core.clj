@@ -1,38 +1,27 @@
 (ns clojure-dj.core
   (:gen-class)
-  (:use bass.core)
-  (:use chord_synth.core)
-  (:use drums.core)
-  (:use overtone.live))
+  (:use bass.core
+        chord_synth.core
+        drums.core)
+  (:require [overtone.live :as overtone]
+            [leipzig.live :as live]
+            [leipzig.scale :as scale]
+            [leipzig.melody :refer [all bpm is phrase tempo then times where with]]))
 
-(defn chord-progression-beat [m beat-num]
-  (at (m (+ 1 beat-num)) (play-chord (chord :C4 :major)))
-  (at (m (+ 5 beat-num)) (play-chord (chord :G3 :major)))
-  (at (m (+ 8 beat-num)) (play-chord (chord :A3 :minor)))
-  (at (m (+ 13 beat-num)) (play-chord (chord :F3 :major)))
-  (apply-at (m (+ 16 beat-num)) chord-progression-beat m (+ 16 beat-num) []))
+(defmethod live/play-note :default [{midi :pitch}]
+  (-> midi overtone/midi->hz (bass)))
 
-(defn drum-beat [m beat-num]
-  (at (m (+ 1 beat-num)) (kick))
-  (at (m (+ 3 beat-num)) (kick))
-  (at (m (+ 5 beat-num)) (kick))
-  (at (m (+ 6 beat-num)) (kick))
-  (at (m (+ 6.5 beat-num)) (kick))
-  (at (m (+ 6.75 beat-num)) (bass))
-  (at (m (+ 7 beat-num)) (kick))
-  (at (m (+ 9 beat-num)) (kick))
-  (at (m (+ 10 beat-num)) (kick))
-  (at (m (+ 10.5 beat-num)) (kick))
-  (at (m (+ 10.75 beat-num)) (bass))
-  (at (m (+ 11 beat-num)) (kick))
-  (at (m (+ 13 beat-num)) (kick))
-  (at (m (+ 15 beat-num)) (kick))
-  (apply-at (m (+ 16 beat-num)) drum-beat m (+ 16 beat-num) []))
+(def melody
+  (phrase [3/3 3/3 2/3 1/3 3/3]
+          [0 0 0 1 2]))
 
-(defonce metro (metronome 120))
+(def track
+  (->>
+    melody
+    (then (times 2 melody))
+    (tempo (bpm 90))
+    (where :pitch (comp scale/C scale/major))
+    live/play))
 
-(defn -main
-  "Insert Beautiful Music Here."
-  [& args]
-  (chord-progression-beat metro (metro))
-  (drum-beat metro (metro)))
+(defn -main "Insert Beautiful Music Here." []
+  (var track))
