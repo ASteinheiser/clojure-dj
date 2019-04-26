@@ -11,15 +11,15 @@
 (defmethod live/play-note :default [{midi :pitch}]
   (-> midi overtone/midi->hz (bass)))
 
-(def melody
-  (phrase [3/3 3/3 2/3 1/3 3/3]
-          [0 0 0 1 2]))
+(def pixel-beat
+  (phrase [1/3 1/3 1/3 1/3 1/3 1/3 1/3 1/3 1/3 1/3 1/3 1/3]
+          [2 2 3 2 1 0 0 1 2 2 3 2]))
 
 (def track
   (->>
-    melody
-    (then (times 2 melody))
-    (tempo (bpm 90))
+    pixel-beat
+    (then (times 2 pixel-beat))
+    (tempo (bpm 45))
     (where :pitch (comp scale/C scale/major))
     live/play))
 
