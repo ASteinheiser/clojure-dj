@@ -10,15 +10,23 @@
 
 (defmethod live/play-note :default [{midi :pitch}]
   (-> midi overtone/midi->hz (bass)))
+(defmethod live/play-note :beat [{midi :pitch}]
+  (-> midi overtone/midi->hz (kick)))
 
 (def pixel-beat
   (phrase [1/3 1/3 1/3 1/3 1/3 1/3 1/3 1/3 1/3 1/3 1/3 1/3]
           [2 2 3 2 1 0 0 1 2 2 3 2]))
 
+(def drum-beat
+  (->>
+    (phrase [2/3 2/3 2/3 2/3 2/3]
+            [2 2 1 0 0])
+    (where :part (is :beat))))
+
 (def track
   (->>
-    pixel-beat
-    (then (times 2 pixel-beat))
+    (with drum-beat pixel-beat)
+    (then (times 2 (with drum-beat pixel-beat)))
     (tempo (bpm 45))
     (where :pitch (comp scale/C scale/major))
     live/play))
