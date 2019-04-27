@@ -19,6 +19,7 @@
   (->>
     (phrase [2/4 2/4 2/4 2/4 2/4 6/4]
             [  4   4   3   2   2   2])
+    (times 2)
     (where :part (is :beat))))
 
 (def end-beat
@@ -28,7 +29,7 @@
 (def track
   (->>
     bass-line
-    (then (times 2 (with bass-line (times 2 pixel-beat))))
+    (then (times 2 (with bass-line pixel-beat)))
     (then bass-line)
     (then end-beat)
     (tempo (bpm 90))
