@@ -21,11 +21,16 @@
             [  4   4   3   2   2   2])
     (where :part (is :beat))))
 
+(def end-beat
+  (phrase [3/4 1/4 2/4 4/4 4/4 4/4]
+          [  3   2   2   3   1   0]))
+
 (def track
   (->>
     bass-line
     (then (times 2 (with bass-line (times 2 pixel-beat))))
     (then bass-line)
+    (then end-beat)
     (tempo (bpm 90))
     (where :pitch (comp temperament/equal scale/C scale/major))
     live/play))
