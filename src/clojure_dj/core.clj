@@ -3,32 +3,31 @@
   (:use bass.core
         chord_synth.core
         drums.core)
-  (:require [overtone.live :as overtone]
-            [leipzig.live :as live]
+  (:require [leipzig.live :as live]
             [leipzig.scale :as scale]
+            [leipzig.temperament :as temperament]
             [leipzig.melody :refer [all bpm is phrase tempo then times where with]]))
 
-(defmethod live/play-note :default [{midi :pitch}]
-  (-> midi overtone/midi->hz (bass)))
-(defmethod live/play-note :beat [{midi :pitch}]
-  (-> midi overtone/midi->hz (kick)))
+(defmethod live/play-note :default [{hertz :pitch}] (bass hertz))
+(defmethod live/play-note :beat [{hertz :pitch}] (kick hertz))
+
+(def bass-line
+  (phrase [2/4 2/4 2/4 2/4 1/4 2/4 2/4 2/4 2/4 1/4 2/4 2/4 1/4 2/4 2/4 1/4 2/4 2/4]
+          [  2   2   2   3   3   3   2   2   2   1   1   0   0   0   1   1   1   2]))
 
 (def pixel-beat
-  (phrase [1/3 1/3 1/3 1/3 1/3 1/3 1/3 1/3 1/3 1/3 1/3 1/3]
-          [2 2 3 2 1 0 0 1 2 2 3 2]))
-
-(def drum-beat
   (->>
-    (phrase [2/3 2/3 2/3 2/3 2/3]
-            [2 2 1 0 0])
+    (phrase [2/4 2/4 2/4 2/4 2/4 6/4]
+            [  4   4   3   2   2   2])
     (where :part (is :beat))))
 
 (def track
   (->>
-    (with drum-beat pixel-beat)
-    (then (times 2 (with drum-beat pixel-beat)))
-    (tempo (bpm 45))
-    (where :pitch (comp scale/C scale/major))
+    bass-line
+    (then (times 2 (with bass-line (times 2 pixel-beat))))
+    (then bass-line)
+    (tempo (bpm 90))
+    (where :pitch (comp temperament/equal scale/C scale/major))
     live/play))
 
 (defn -main "Insert Beautiful Music Here." []
