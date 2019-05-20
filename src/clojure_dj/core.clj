@@ -26,7 +26,7 @@
   (phrase [3/4 1/4 2/4 4/4 4/4 4/4]
           [  3   2   2   3   1   0]))
 
-(def track
+(def demo-track
   (->>
     bass-line
     (then (times 2 (with bass-line pixel-beat)))
@@ -37,4 +37,4 @@
     live/play))
 
 (defn -main "Insert Beautiful Music Here." []
-  (var track))
+  (var demo-track))

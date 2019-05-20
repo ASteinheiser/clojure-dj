@@ -10,6 +10,7 @@ lein run
 #### or
 ```
 lein repl
+=> (use 'clojure-dj.core :reload)
 ```
 
 ## Build & Distribute App
