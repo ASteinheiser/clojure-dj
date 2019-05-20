@@ -2,14 +2,17 @@
   (:gen-class)
   (:use bass.core
         chord_synth.core
-        drums.core)
+        drums.core
+        organ.core)
   (:require [leipzig.live :as live]
             [leipzig.scale :as scale]
+            [leipzig.chord :as chord]
             [leipzig.temperament :as temperament]
-            [leipzig.melody :refer [all bpm is phrase tempo then times where with]]))
+            [leipzig.melody :refer [all bpm is phrase tempo then times where with mapthen]]))
 
 (defmethod live/play-note :default [{hertz :pitch}] (bass hertz))
 (defmethod live/play-note :beat [{hertz :pitch}] (kick hertz))
+(defmethod live/play-note :synth [{hertz :pitch seconds :duration}] (organ hertz seconds))
 
 (def bass-line
   (phrase [2/4 2/4 2/4 2/4 1/4 2/4 2/4 2/4 2/4 1/4 2/4 2/4 1/4 2/4 2/4 1/4 2/4 2/4]
@@ -26,12 +29,19 @@
   (phrase [3/4 1/4 2/4 4/4 4/4 4/4]
           [  3   2   2   3   1   0]))
 
+(def progression [0 0 3 0 4 0])
+
+(defn synth-beat [root]
+  (->> (phrase (repeat 8 1) (-> chord/seventh (chord/root root) vals cycle))
+       (where :part (is :synth))))
+
 (def demo-track
   (->>
-    bass-line
-    (then (times 2 (with bass-line pixel-beat)))
-    (then bass-line)
-    (then end-beat)
+    (mapthen synth-beat progression)
+    ; bass-line
+    ; (then (times 2 (with bass-line pixel-beat)))
+    ; (then bass-line)
+    ; (then end-beat)
     (tempo (bpm 90))
     (where :pitch (comp temperament/equal scale/C scale/major))
     live/play))
