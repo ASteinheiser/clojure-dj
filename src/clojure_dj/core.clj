@@ -29,7 +29,7 @@
   (phrase [3/4 1/4 2/4 4/4 4/4 4/4]
           [  3   2   2   3   1   0]))
 
-(def progression [0 0 3 0 4 0])
+(def progression [0 1 4 7])
 
 (defn synth-beat [root]
   (->> (phrase (repeat 8 1) (-> chord/seventh (chord/root root) vals cycle))
@@ -42,7 +42,7 @@
     ; (then (times 2 (with bass-line pixel-beat)))
     ; (then bass-line)
     ; (then end-beat)
-    (tempo (bpm 90))
+    (tempo (bpm 120))
     (where :pitch (comp temperament/equal scale/C scale/major))
     live/play))
 
