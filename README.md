@@ -2,6 +2,12 @@
 
 A clojure app, made with overtone and leipzig, designed to make _(good?)_ music. I'm not a musician.
 
+## First time install
+```
+brew install clojure
+brew install leiningen
+```
+
 ## Run Locally
 ```
 lein deps
